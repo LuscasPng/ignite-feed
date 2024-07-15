@@ -2,7 +2,7 @@ import { ThumbsUp, Trash } from "phosphor-react";
 import styles from "./Comments.module.css";
 import { Avatar } from "./Avatar";
 
-export function Comments() {
+export function Comments(props) {
   return(
     <div className={styles.comment}>
       <Avatar hasBorder={false} src="https://media.licdn.com/dms/image/D4D03AQFfqsT3fbahiA/profile-displayphoto-shrink_100_100/0/1720493911674?e=1726099200&v=beta&t=A_gkTXXsgw9tcIAoUmFANm_eEa3TwuHhcKmfzARpMx0" />
@@ -15,7 +15,7 @@ export function Comments() {
             </div>
             <button title="Excluir comentario"><Trash size={20} /></button>
           </header>
-          <p>Muito bom Devon, parabéns!! 👏👏</p>
+          <p>{props.content}</p>
         </div>
         <footer>
           <button>
