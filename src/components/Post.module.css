@@ -25,15 +25,6 @@
   gap: 1rem;
 }
 
-.avatar {
-  width: 3rem;
-  height: 3rem;
-  border-radius: 8px;
-  border: 4px solid var(--zinc-800);
-  outline: 2px solid var(--blue-500);
-  box-sizing: initial;
-}
-
 .authorInfo {
   display: flex;
   flex-direction: column;
@@ -120,4 +111,8 @@
 
 .commentForm button[type=submit]:hover {
   background: var(--blue-400);
+}
+
+.commentList { 
+  margin-top: 2rem;
 }

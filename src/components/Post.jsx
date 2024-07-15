@@ -1,14 +1,18 @@
+import { Avatar } from "./Avatar"
+import { Comments } from "./Comments"
 import styles from "./Post.module.css"
 
-export function Post() {
+export function Post(props) {
+  console.log(props);
+
   return(
     <article className={styles.post}>
       <header>
         <div className={styles.author}>
-          <img className={styles.avatar} src="https://media.licdn.com/dms/image/D4D03AQFfqsT3fbahiA/profile-displayphoto-shrink_100_100/0/1720493911674?e=1726099200&v=beta&t=A_gkTXXsgw9tcIAoUmFANm_eEa3TwuHhcKmfzARpMx0" />
+          <Avatar src={props.author.avatarUrl} />
           <div className={styles.authorInfo}>
-            <strong>Lucas Ferreira</strong>
-            <span>Developer</span>
+            <strong>{props.author.name}</strong>
+            <span>{props.author.role}</span>
           </div>
         </div>
         <time dateTime="2024-07-13 12:56:00" title="13 de Julho às 12:56">Publicado há 1h</time>
@@ -32,6 +36,11 @@ export function Post() {
           <button type="submit">Publicar</button>
         </footer>
       </form>
+      <div className={styles.commentList}>
+        <Comments />
+        <Comments />
+        <Comments />
+      </div>
     </article>
   )
 }
