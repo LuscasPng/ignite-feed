@@ -32,10 +32,23 @@ export function Post(props) {
   }
 
   function handleNewComment() {
+    event.target.setCustomValidity("")
     setnewComment(event.target.value)
   }
 
-  return(
+  function deleteComment(commentToDelete) {
+    // Imutabilidade -> Variaveis não sofrem mutação, e sim, criamos um novo valor (um novo espaço na memoria)
+    const commentsWithotDeletedOne = comments.filter(comment => {
+      return comment !== commentToDelete
+    })
+    setComments(commentsWithotDeletedOne)
+  }
+
+  function handleNewCommentInvalid() {
+    event.target.setCustomValidity("Campo obrigatório")
+  }
+
+  return (
     <article className={styles.post}>
       <header>
         <div className={styles.author}>
@@ -49,30 +62,33 @@ export function Post(props) {
       </header>
       <div className={styles.content}>
         {props.content.map(line => {
-          if(line.type === "paragraph") {
-            return <p>{line.content}</p>
-          } else if(line.type === "link") {
-            return <a href="#">{line.content}</a>
+          if (line.type === "paragraph") {
+            return <p key={line.content}>{line.content}</p>
+          } else if (line.type === "link") {
+            return <p key={line.content}><a href="#">{line.content}</a></p>
           }
         })}
       </div>
       <form onSubmit={handleCreateNewComment} className={styles.commentForm}>
         <strong>Deixe seu feedback</strong>
-        <textarea 
+        <textarea
           name="comment"
           placeholder="Deixe um comentário"
           value={newComment}
           onChange={handleNewComment}
+          onInvalid={handleNewCommentInvalid}
+          required
         />
         <footer>
-          <button type="submit">Publicar</button>
+          <button type="submit" disabled={newComment.length === 0}>Publicar</button>
         </footer>
       </form>
       <div className={styles.commentList}>
         {comments.map(comment => {
-          return <Comments content={comment} />
+          return <Comments key={comment} content={comment} onDeleteComment={deleteComment} />
         })}
       </div>
+      
     </article>
   )
 }
